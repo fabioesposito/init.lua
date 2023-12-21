@@ -1,6 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -146,7 +143,7 @@ require("lazy").setup({
 -- ------------
 -- Plugin config
 -- ------------
--- require('mini.basics').setup()
+require('mini.basics').setup()
 require('mini.tabline').setup()
 require('mini.statusline').setup()
 require('mini.pairs').setup()
@@ -154,20 +151,6 @@ require('mini.surround').setup()
 require('mini.comment').setup()
 require('mini.cursorword').setup()
 require('mini.fuzzy').setup()
-
-local animate = require('mini.animate')
-animate.setup({
-	cursor = {
-		-- Animate for 200 milliseconds with linear easing
-		timing = animate.gen_timing.linear({ duration = 200, unit = 'total' }),
-
-		-- Animate with shortest line for any cursor move
-		path = animate.gen_path.line({
-			predicate = function() return true end,
-		}),
-	}
-})
-
 
 require('gitsigns').setup {
 	on_attach = function(bufnr)
@@ -229,14 +212,13 @@ cmp.setup({
 	sources = {
 		{ name = 'path' },
 		{ name = 'nvim_lsp' },
-		-- { name = 'nvim_lua' },
 	},
 	formatting = lsp_zero.cmp_format(),
 	mapping = cmp.mapping.preset.insert({
-		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-		['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-		['<C-y>'] = cmp.mapping.confirm({ select = true }),
 		['<C-Space>'] = cmp.mapping.complete(),
+		['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
+		['<Down>'] = cmp.mapping.select_next_item(cmp_select),
+		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 })
 
@@ -253,50 +235,19 @@ require('mason-lspconfig').setup({
 -- vim configs
 -- ------------
 
+-- fix tabs
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
 
-vim.o.scrolloff = 8
-
--- Set highlight on search
-vim.o.hlsearch = false
-
 -- Make line numbers default
 vim.wo.number = true
 vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.scrolloff = 8
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
+-- vim.o.completeopt = 'menuone,noselect'
 
 -- ------------
 -- keybindings
@@ -307,7 +258,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- move select text up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
 vim.keymap.set("n", "J", "mzJ`z")
 
 -- pgup/down with cursor in the middle
@@ -338,6 +288,14 @@ vim.keymap.set('n', '<leader>bl', require('telescope.builtin').buffers, { desc =
 vim.keymap.set('n', '<leader>bc', ':bdelete<cr>', { desc = '[C]lose buffer' })
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = '[N]ext buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprevious<cr>', { desc = '[P]revious buffer' })
+
+local function telescope_live_grep_open_files()
+	require('telescope.builtin').live_grep {
+		grep_open_files = true,
+		prompt_title = 'Live Grep in Open Files',
+	}
+end
+vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').live_grep, { desc = '[S]earch by G[r]ep' })
