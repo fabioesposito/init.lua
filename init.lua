@@ -71,20 +71,14 @@ require("lazy").setup({
 	},
 
 	-- golang extra functionalities
-	{
-		"ray-x/go.nvim",
-		dependencies = { -- optional packages
-			"ray-x/guihua.lua",
-			"neovim/nvim-lspconfig",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("go").setup()
-		end,
-		event = { "CmdlineEnter" },
-		ft = { "go", 'gomod' },
-		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-	},
+	-- {
+	-- 	"ray-x/go.nvim",
+	-- 	dependencies = { -- optional packages
+	-- 		"ray-x/guihua.lua",
+	-- 		"neovim/nvim-lspconfig",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- },
 
 	-- local LLM using ollama
 	{
@@ -164,6 +158,14 @@ require('which-key').register({
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+require('nvim-treesitter.configs').setup {
+	-- Add languages to be installed here that you want installed for treesitter
+	ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+
+	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+	auto_install = true,
+}
+
 local lsp_zero = require('lsp-zero')
 lsp_zero.on_attach(function(client, bufnr)
 	lsp_zero.buffer_autoformat()
@@ -188,7 +190,7 @@ cmp.setup({
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
 		['<Down>'] = cmp.mapping.select_next_item(cmp_select),
-		['<CR>'] = cmp.mapping.confirm({ select = true }),
+		['<Tab>'] = cmp.mapping.confirm({ select = true }),
 	}),
 })
 
@@ -205,6 +207,11 @@ vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.smartindent = true
+
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.o.clipboard = 'unnamedplus'
 
 -- Make line numbers default
 vim.wo.number = true
