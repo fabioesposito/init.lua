@@ -15,54 +15,25 @@ vim.opt.rtp:prepend(lazypath)
 -- ------------
 -- Plugin install
 -- ------------
-
 require("lazy").setup({
 
 	-- nerdfonts, icons and so on...
 	{ 'nvim-tree/nvim-web-devicons' },
-
 	-- rose-pine theme
-	{
-		"rose-pine/neovim",
-		config = function()
-			vim.cmd.colorscheme 'rose-pine-moon'
-		end,
-	},
-
+	{ "rose-pine/neovim",                    config = function() vim.cmd.colorscheme 'rose-pine-moon' end },
 	-- file manager
-	{ "stevearc/oil.nvim",          opts = {} },
-
+	{ "stevearc/oil.nvim",                   opts = {} },
 	-- collection of utilities
-	{
-		'echasnovski/mini.nvim',
-		version = '*'
-	},
-
+	{ 'echasnovski/mini.nvim',               version = '*' },
 	-- git stuff
-	{
-		"kdheepak/lazygit.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
+	{ "kdheepak/lazygit.nvim",               dependencies = { "nvim-lua/plenary.nvim", }, },
 	{ 'lewis6991/gitsigns.nvim' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
-
 	-- vertical guide
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {}
-	},
-
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                                opts = {} },
 	-- colorize TODO: FIXME: NOTE: tags
-	{
-		"folke/todo-comments.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {}
-	},
-
+	{ "folke/todo-comments.nvim",            dependencies = { "nvim-lua/plenary.nvim" },                  opts = {} },
 	-- command palette
 	{
 		"folke/which-key.nvim",
@@ -73,21 +44,12 @@ require("lazy").setup({
 		end,
 		opts = {}
 	},
-
 	-- telescope
-	{
-		'nvim-telescope/telescope.nvim',
-		tag = '0.1.5',
-		dependencies = { 'nvim-lua/plenary.nvim' }
-	},
-
+	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5',  dependencies = { 'nvim-lua/plenary.nvim' } },
 	-- lastly the LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
-	{
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v3.x'
-	},
+	{ 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
 	{ 'neovim/nvim-lspconfig' },
 	{ 'hrsh7th/cmp-nvim-lsp' },
 	{ 'hrsh7th/nvim-cmp' },
@@ -99,7 +61,6 @@ require("lazy").setup({
 		},
 		build = ':TSUpdate',
 	},
-
 	-- golang extra functionalities
 	{
 		"ray-x/go.nvim",
@@ -115,7 +76,6 @@ require("lazy").setup({
 		ft = { "go", 'gomod' },
 		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 	},
-
 	-- local LLM using ollama
 	{
 		"David-Kunz/gen.nvim",
@@ -225,16 +185,11 @@ cmp.setup({
 -- see :help lsp-zero-guide:integrate-with-mason-nvim
 -- to learn how to use mason.nvim with lsp-zero
 require('mason').setup({})
-require('mason-lspconfig').setup({
-	handlers = {
-		lsp_zero.default_setup,
-	}
-})
+require('mason-lspconfig').setup({ handlers = { lsp_zero.default_setup, } })
 
 -- ------------
 -- vim configs
 -- ------------
-
 -- fix tabs
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
@@ -246,13 +201,9 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.o.scrolloff = 8
 
--- Set completeopt to have a better completion experience
--- vim.o.completeopt = 'menuone,noselect'
-
 -- ------------
 -- keybindings
 -- ------------
-
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- move select text up/down
