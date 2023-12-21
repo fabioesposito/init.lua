@@ -19,8 +19,7 @@ require("lazy").setup({
 	-- nerdfonts, icons and so on...
 	{ 'nvim-tree/nvim-web-devicons' },
 
-	-- rose-pine theme
-	-- { "rose-pine/neovim",                    config = function() vim.cmd.colorscheme 'rose-pine-moon' end },
+	-- colorscheme
 	{
 		"craftzdog/solarized-osaka.nvim",
 		lazy = false,
@@ -114,6 +113,7 @@ require("lazy").setup({
 			debug = false                  -- Prints errors and the command which is run.
 		},
 	},
+	{ 'wuelnerdotexe/vim-astro' },
 
 })
 
