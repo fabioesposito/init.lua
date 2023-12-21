@@ -16,24 +16,30 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin install
 -- ------------
 require("lazy").setup({
-
 	-- nerdfonts, icons and so on...
 	{ 'nvim-tree/nvim-web-devicons' },
+
 	-- rose-pine theme
 	{ "rose-pine/neovim",                    config = function() vim.cmd.colorscheme 'rose-pine-moon' end },
+
 	-- file manager
 	{ "stevearc/oil.nvim",                   opts = {} },
+
 	-- collection of utilities
 	{ 'echasnovski/mini.nvim',               version = '*' },
+
 	-- git stuff
 	{ "kdheepak/lazygit.nvim",               dependencies = { "nvim-lua/plenary.nvim", }, },
 	{ 'lewis6991/gitsigns.nvim' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
+
 	-- vertical guide
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                                opts = {} },
+
 	-- colorize TODO: FIXME: NOTE: tags
 	{ "folke/todo-comments.nvim",            dependencies = { "nvim-lua/plenary.nvim" },                  opts = {} },
+
 	-- command palette
 	{
 		"folke/which-key.nvim",
@@ -44,8 +50,10 @@ require("lazy").setup({
 		end,
 		opts = {}
 	},
+
 	-- telescope
 	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5',  dependencies = { 'nvim-lua/plenary.nvim' } },
+
 	-- lastly the LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
@@ -61,6 +69,7 @@ require("lazy").setup({
 		},
 		build = ':TSUpdate',
 	},
+
 	-- golang extra functionalities
 	{
 		"ray-x/go.nvim",
@@ -76,6 +85,7 @@ require("lazy").setup({
 		ft = { "go", 'gomod' },
 		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 	},
+
 	-- local LLM using ollama
 	{
 		"David-Kunz/gen.nvim",
@@ -246,6 +256,7 @@ local function telescope_live_grep_open_files()
 		prompt_title = 'Live Grep in Open Files',
 	}
 end
+
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
