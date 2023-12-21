@@ -124,6 +124,7 @@ require("lazy").setup({
 		"David-Kunz/gen.nvim",
 		opts = {
 			model = "mistral:7b", -- The default model to use.
+			-- model = "phi", -- The default model to use.
 			display_mode = "float", -- The display mode. Can be "float" or "split".
 			show_prompt = false, -- Shows the Prompt submitted to Ollama.
 			show_model = false, -- Displays which model you are using at the beginning of your chat session.
@@ -145,7 +146,7 @@ require("lazy").setup({
 -- ------------
 -- Plugin config
 -- ------------
-
+-- require('mini.basics').setup()
 require('mini.tabline').setup()
 require('mini.statusline').setup()
 require('mini.pairs').setup()
@@ -153,7 +154,20 @@ require('mini.surround').setup()
 require('mini.comment').setup()
 require('mini.cursorword').setup()
 require('mini.fuzzy').setup()
--- require('mini.move').setup()
+
+local animate = require('mini.animate')
+animate.setup({
+	cursor = {
+		-- Animate for 200 milliseconds with linear easing
+		timing = animate.gen_timing.linear({ duration = 200, unit = 'total' }),
+
+		-- Animate with shortest line for any cursor move
+		path = animate.gen_path.line({
+			predicate = function() return true end,
+		}),
+	}
+})
+
 
 require('gitsigns').setup {
 	on_attach = function(bufnr)
