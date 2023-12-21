@@ -176,6 +176,18 @@ require('nvim-treesitter.configs').setup {
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = true,
+
+	textobjects = {
+		swap = {
+			enable = true,
+			swap_next = {
+				["<leader>a"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>A"] = "@parameter.inner",
+			},
+		},
+	},
 }
 
 local lsp_zero = require('lsp-zero')
