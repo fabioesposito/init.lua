@@ -16,10 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin install
 -- ------------
 require("lazy").setup({
-	-- nerdfonts, icons and so on...
 	{ 'nvim-tree/nvim-web-devicons' },
 
-	-- colorscheme
 	{
 		"craftzdog/solarized-osaka.nvim",
 		lazy = false,
@@ -60,7 +58,7 @@ require("lazy").setup({
 	-- telescope
 	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5',  dependencies = { 'nvim-lua/plenary.nvim' } },
 
-	-- lastly the LSP plugins
+	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
 	{ 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
@@ -115,6 +113,8 @@ require("lazy").setup({
 	},
 	{ 'wuelnerdotexe/vim-astro' },
 
+	-- fix lua lsp (fix vim global issue)
+	{ "folke/neodev.nvim",      opts = {} }
 })
 
 -- ------------
@@ -204,7 +204,6 @@ end)
 lsp_zero.setup_servers({ 'lua_ls', 'rust_analyzer', 'gopls', 'html', 'htmx', 'tsserver' })
 
 local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
 	sources = {
 		{ name = 'path' },
@@ -212,12 +211,6 @@ cmp.setup({
 		{ name = 'luasnip' },
 	},
 	formatting = lsp_zero.cmp_format(),
-	mapping = cmp.mapping.preset.insert({
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
-		['<Down>'] = cmp.mapping.select_next_item(cmp_select),
-		['<Tab>'] = cmp.mapping.confirm({ select = true }),
-	}),
 })
 
 -- see :help lsp-zero-guide:integrate-with-mason-nvim
