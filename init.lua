@@ -159,10 +159,9 @@ require('which-key').register({
 	['<leader>h'] = { 'Git [H]unk' },
 	['<leader>s'] = { '[S]earch' },
 	['<leader>b'] = { '[B]uffers' },
-	['<leader>g'] = { '[L]SP' },
+	['<leader>g'] = { 'LSP' },
 }, { mode = 'n' })
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
 
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
@@ -178,18 +177,20 @@ lsp_zero.on_attach(function(client, bufnr)
 
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	-- lsp_zero.default_keymaps({ buffer = bufnr })
-	vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = bufnr })
-	vim.keymap.set('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', { buffer = bufnr })
-	vim.keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', { buffer = bufnr })
-	vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-	vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+	lsp_zero.default_keymaps({
+		buffer = bufnr,
+		preserve_mappings = false
+	})
 end)
+lsp_zero.setup_servers({ 'lua_ls', 'rust_analyzer', 'gopls', 'html', 'htmx', 'tsserver' })
 
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
 	sources = {
 		{ name = 'path' },
 		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
 	},
 	formatting = lsp_zero.cmp_format(),
 	mapping = cmp.mapping.preset.insert({
@@ -257,7 +258,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	pattern = '*',
 })
 
-vim.keymap.set('n', '<leader>f', ':Oil --float<cr>', { desc = '[F]ile manager' })
+vim.keymap.set('n', '<leader>e', ':Oil --float<cr>', { desc = '[E]xplorer' })
 vim.keymap.set('n', '<leader>bl', require('telescope.builtin').buffers, { desc = 'Buffer [l]ist' })
 vim.keymap.set('n', '<leader>bc', ':bdelete<cr>', { desc = '[C]lose buffer' })
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = '[N]ext buffer' })
