@@ -20,7 +20,14 @@ require("lazy").setup({
 	{ 'nvim-tree/nvim-web-devicons' },
 
 	-- rose-pine theme
-	{ "rose-pine/neovim",                    config = function() vim.cmd.colorscheme 'rose-pine-moon' end },
+	-- { "rose-pine/neovim",                    config = function() vim.cmd.colorscheme 'rose-pine-moon' end },
+	{
+		"craftzdog/solarized-osaka.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function() vim.cmd.colorscheme 'solarized-osaka' end,
+		opts = {},
+	},
 
 	-- file manager
 	{ "stevearc/oil.nvim",                   opts = {} },
@@ -35,10 +42,10 @@ require("lazy").setup({
 	{ 'tpope/vim-rhubarb' },
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                                opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                opts = {} },
 
 	-- colorize TODO: FIXME: NOTE: tags
-	{ "folke/todo-comments.nvim",            dependencies = { "nvim-lua/plenary.nvim" },                  opts = {} },
+	{ "folke/todo-comments.nvim",            dependencies = { "nvim-lua/plenary.nvim" },  opts = {} },
 
 	-- command palette
 	{
