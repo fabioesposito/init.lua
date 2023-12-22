@@ -27,7 +27,7 @@ require("lazy").setup({
 	},
 
 	-- file manager
-	{ "stevearc/oil.nvim",                   opts = {} },
+	{ "stevearc/oil.nvim",                   opts = { default_file_explorer = false } },
 
 	-- collection of utilities
 	{ 'echasnovski/mini.nvim',               version = '*' },
