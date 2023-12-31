@@ -112,7 +112,6 @@ require("lazy").setup({
 			debug = false                  -- Prints errors and the command which is run.
 		},
 	},
-	{ 'wuelnerdotexe/vim-astro' },
 })
 
 -- ------------
@@ -207,7 +206,9 @@ cmp.setup({
 	sources = {
 		{ name = 'path' },
 		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
+		{ name = 'nvim_lua' },
+		{ name = 'luasnip', keyword_length = 2 },
+		{ name = 'buffer',  keyword_length = 3 },
 	},
 	formatting = lsp_zero.cmp_format(),
 })
@@ -215,7 +216,9 @@ cmp.setup({
 -- see :help lsp-zero-guide:integrate-with-mason-nvim
 -- to learn how to use mason.nvim with lsp-zero
 require('mason').setup({})
-require('mason-lspconfig').setup({ handlers = { lsp_zero.default_setup, } })
+require('mason-lspconfig').setup({
+	handlers = { lsp_zero.default_setup },
+})
 
 -- ------------
 -- vim configs
