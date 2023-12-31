@@ -19,6 +19,7 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
+	-- color theme
 	{
 		"craftzdog/solarized-osaka.nvim",
 		lazy = false,
@@ -42,7 +43,7 @@ require("lazy").setup({
 	-- vertical guide
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                            opts = {} },
 
-	-- colorize TODO: FIXME: NOTE: tags
+	-- colorize tags like TODO: FIXME: NOTE:
 	{ "folke/todo-comments.nvim",            opts = {} },
 
 	-- command palette
@@ -126,6 +127,13 @@ require('mini.comment').setup()
 require('mini.cursorword').setup()
 require('mini.fuzzy').setup()
 
+require('which-key').register({
+	['<leader>h'] = { 'Git [H]unk' },
+	['<leader>s'] = { '[S]earch' },
+	['<leader>b'] = { '[B]uffers' },
+	['<leader>g'] = { 'LSP' },
+}, { mode = 'n' })
+
 require('gitsigns').setup {
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
@@ -159,14 +167,6 @@ require('gitsigns').setup {
 		map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "Undo stage hunk" })
 	end
 }
-
-require('which-key').register({
-	['<leader>h'] = { 'Git [H]unk' },
-	['<leader>s'] = { '[S]earch' },
-	['<leader>b'] = { '[B]uffers' },
-	['<leader>g'] = { 'LSP' },
-}, { mode = 'n' })
-
 
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
