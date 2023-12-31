@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin install
 -- ------------
 require("lazy").setup({
+	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
 	{
@@ -33,16 +34,16 @@ require("lazy").setup({
 	{ 'echasnovski/mini.nvim',               version = '*' },
 
 	-- git stuff
-	{ "kdheepak/lazygit.nvim",               dependencies = { "nvim-lua/plenary.nvim", }, },
+	{ "kdheepak/lazygit.nvim", },
 	{ 'lewis6991/gitsigns.nvim' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                            opts = {} },
 
 	-- colorize TODO: FIXME: NOTE: tags
-	{ "folke/todo-comments.nvim",            dependencies = { "nvim-lua/plenary.nvim" },  opts = {} },
+	{ "folke/todo-comments.nvim",            opts = {} },
 
 	-- command palette
 	{
@@ -56,7 +57,7 @@ require("lazy").setup({
 	},
 
 	-- telescope
-	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5',  dependencies = { 'nvim-lua/plenary.nvim' } },
+	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5', },
 
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
@@ -112,9 +113,6 @@ require("lazy").setup({
 		},
 	},
 	{ 'wuelnerdotexe/vim-astro' },
-
-	-- fix lua lsp (fix vim global issue)
-	{ "folke/neodev.nvim",      opts = {} }
 })
 
 -- ------------
