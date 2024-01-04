@@ -29,11 +29,16 @@ require("lazy").setup({
 	},
 
 	-- file manager
-	{ "stevearc/oil.nvim",                   opts = { default_file_explorer = false } },
+	{ "stevearc/oil.nvim",     opts = { default_file_explorer = false } },
 
 	-- collection of utilities
-	{ 'echasnovski/mini.nvim',               version = '*' },
-
+	{ 'echasnovski/mini.nvim', version = '*' },
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
 	-- git stuff
 	{ "kdheepak/lazygit.nvim", },
 	{ 'lewis6991/gitsigns.nvim' },
@@ -41,7 +46,7 @@ require("lazy").setup({
 	{ 'tpope/vim-rhubarb' },
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                            opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
 	-- colorize tags like TODO: FIXME: NOTE:
 	{ "folke/todo-comments.nvim",            opts = {} },
