@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- ------------
 -- Plugin install
--- ------------
 require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
@@ -39,6 +38,7 @@ require("lazy").setup({
 			require("nvim-ts-autotag").setup()
 		end,
 	},
+
 	-- git stuff
 	{ "kdheepak/lazygit.nvim", },
 	{ 'lewis6991/gitsigns.nvim' },
@@ -108,15 +108,12 @@ require("lazy").setup({
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim"
 		}
 	},
 })
 
 -- ------------
 -- Plugin config
--- ------------
 require('mini.basics').setup()
 require('mini.tabline').setup()
 require('mini.statusline').setup()
@@ -228,7 +225,7 @@ require('mason-lspconfig').setup({
 
 -- ------------
 -- vim configs
--- ------------
+
 -- fix tabs
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
@@ -247,7 +244,6 @@ vim.o.scrolloff = 8
 
 -- ------------
 -- keybindings
--- ------------
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- move select text up/down
