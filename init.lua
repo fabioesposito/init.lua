@@ -20,11 +20,10 @@ require("lazy").setup({
 
 	-- color theme
 	{
-		"craftzdog/solarized-osaka.nvim",
-		lazy = false,
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
-		config = function() vim.cmd.colorscheme 'solarized-osaka' end,
-		opts = {},
+		config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
 	},
 
 	-- file manager
