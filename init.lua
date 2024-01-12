@@ -23,7 +23,7 @@ require("lazy").setup({
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		config = function() vim.cmd.colorscheme 'catppuccin-frappe' end,
+		config = function() vim.cmd.colorscheme 'catppuccin-latte' end,
 	},
 
 	-- file manager
@@ -274,7 +274,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.keymap.set('n', '<leader>e', ':Oil --float<cr>', { desc = '[E]xplorer' })
-vim.keymap.set('n', '<leader>bl', require('telescope.builtin').buffers, { desc = 'Buffer [l]ist' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Buffer [l]ist' })
 vim.keymap.set('n', '<leader>bc', ':bdelete<cr>', { desc = '[C]lose buffer' })
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = '[N]ext buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprevious<cr>', { desc = '[P]revious buffer' })
