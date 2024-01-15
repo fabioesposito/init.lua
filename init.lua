@@ -224,6 +224,7 @@ require('mason-lspconfig').setup({
 
 -- ------------
 -- vim configs
+vim.opt.guicursor = ""
 
 -- fix tabs
 vim.o.tabstop = 4
