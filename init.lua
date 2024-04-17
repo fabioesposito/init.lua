@@ -18,8 +18,7 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
-	-- color theme
-	{
+	{ -- colorscheme
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
@@ -108,13 +107,11 @@ require("lazy").setup({
 
 	-- llm
 	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("chatgpt").setup()
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
+		"David-Kunz/gen.nvim",
+		opts = {
+			model = "mistral",
+			host = "localhost",
+			port = "11434",
 		}
 	},
 })
@@ -299,3 +296,4 @@ vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]e
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').live_grep, { desc = '[S]earch by G[r]ep' })
+vim.keymap.set('n', '<leader>q', ':qa<cr>', { desc = '[Q]uit' })
