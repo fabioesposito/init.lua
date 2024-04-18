@@ -23,7 +23,6 @@ require("lazy").setup({
 		name = "rose-pine",
 		priority = 1000,
 		config = function() vim.cmd("colorscheme rose-pine") end,
-
 	},
 
 	-- file manager
@@ -298,3 +297,4 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').live_grep, { desc = '[S]earch by G[r]ep' })
 vim.keymap.set('n', '<leader>q', ':qa<cr>', { desc = '[Q]uit' })
+vim.keymap.set('n', '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
