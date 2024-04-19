@@ -131,7 +131,7 @@ require('which-key').register({
 	['<leader>h'] = { 'Git [H]unk' },
 	['<leader>s'] = { '[S]earch' },
 	['<leader>b'] = { '[B]uffers' },
-	['<leader>g'] = { 'LSP' },
+	['<leader>g'] = { 'Lazy[G]it' },
 }, { mode = 'n' })
 
 require('gitsigns').setup {
@@ -297,4 +297,4 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').live_grep, { desc = '[S]earch by G[r]ep' })
 vim.keymap.set('n', '<leader>q', ':qa<cr>', { desc = '[Q]uit' })
-vim.keymap.set('n', '<leader>gg', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
+vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
