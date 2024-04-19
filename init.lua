@@ -109,7 +109,7 @@ require("lazy").setup({
 	{
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "mistral",
+			model = "llama3",
 			host = "localhost",
 			port = "11434",
 		}
