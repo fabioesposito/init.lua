@@ -48,8 +48,7 @@ require("lazy").setup({
 	-- colorize tags like TODO: FIXME: NOTE:
 	{ "folke/todo-comments.nvim",            opts = {} },
 
-	-- command palette
-	{
+	{ -- command helper
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		init = function()
@@ -88,8 +87,7 @@ require("lazy").setup({
 		build = ':TSUpdate',
 	},
 
-	-- golang extra functionalities
-	{
+	{              -- golang
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
 			"ray-x/guihua.lua",
@@ -104,8 +102,7 @@ require("lazy").setup({
 		build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 	},
 
-	-- llm
-	{
+	{ -- llm
 		"David-Kunz/gen.nvim",
 		opts = {
 			model = "llama3",
@@ -211,6 +208,8 @@ cmp.setup({
 	},
 	formatting = lsp_zero.cmp_format(),
 	mapping = cmp.mapping.preset.insert({
+		['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+		['<Tab>'] = cmp.mapping.select_next_item({ behavior = 'select' }),
 		['<C-b>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
 		['<C-Space>'] = cmp.mapping.complete(),
@@ -227,9 +226,7 @@ require('mason-lspconfig').setup({
 })
 
 -- ------------
--- vim configs
--- vim.opt.guicursor = ""
-
+-- Vim configs
 -- fix tabs
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
