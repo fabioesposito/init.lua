@@ -19,10 +19,9 @@ require("lazy").setup({
 	{ 'nvim-tree/nvim-web-devicons' },
 
 	{ -- colorscheme
-		"rose-pine/neovim",
-		name = "rose-pine",
+		"rebelot/kanagawa.nvim",
 		priority = 1000,
-		config = function() vim.cmd("colorscheme rose-pine") end,
+		config = function() vim.cmd("colorscheme kanagawa") end,
 	},
 
 	-- file manager
@@ -229,7 +228,7 @@ require('mason-lspconfig').setup({
 
 -- ------------
 -- vim configs
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 -- fix tabs
 vim.o.tabstop = 4
