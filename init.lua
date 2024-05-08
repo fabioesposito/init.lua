@@ -67,7 +67,16 @@ require("lazy").setup({
 		end
 	},
 	-- telescope
-	{ 'nvim-telescope/telescope.nvim',    tag = '0.1.5', },
+	{
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.5',
+		dependencies = {
+			"nvim-telescope/telescope-live-grep-args.nvim",
+		},
+		config = function()
+			require("telescope").load_extension("live_grep_args")
+		end,
+	},
 
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
@@ -170,18 +179,6 @@ require('nvim-treesitter.configs').setup {
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = true,
-
-	textobjects = {
-		swap = {
-			enable = true,
-			swap_next = {
-				["<leader>a"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["<leader>A"] = "@parameter.inner",
-			},
-		},
-	},
 }
 
 local lsp_zero = require('lsp-zero')
@@ -276,7 +273,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.keymap.set('n', '<leader>e', ':Oil --float<cr>', { desc = '[E]xplorer' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Buffer [l]ist' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Buffer list' })
 vim.keymap.set('n', '<leader>bc', ':bdelete<cr>', { desc = '[C]lose buffer' })
 vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = '[N]ext buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprevious<cr>', { desc = '[P]revious buffer' })
@@ -288,9 +285,10 @@ local function telescope_live_grep_open_files()
 	}
 end
 
-vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').live_grep, { desc = '[S]earch by G[r]ep' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = 'Search [F]iles' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = 'Search [G]it Files' })
+vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[/] Grep in Open Files' })
+vim.keymap.set("n", '<leader>sr', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+	{ desc = ' G[r]ep with args' })
 vim.keymap.set('n', '<leader>q', ':qa<cr>', { desc = '[Q]uit' })
 vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
