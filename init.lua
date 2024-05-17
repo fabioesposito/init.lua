@@ -18,17 +18,11 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
-	{ -- colorscheme
-		"rebelot/kanagawa.nvim",
-		priority = 1000,
-		config = function() vim.cmd("colorscheme kanagawa") end,
-	},
-
 	-- file manager
-	{ "stevearc/oil.nvim",     opts = { default_file_explorer = false } },
+	{ "stevearc/oil.nvim",          opts = { default_file_explorer = false } },
 
 	-- collection of utilities
-	{ 'echasnovski/mini.nvim', version = '*' },
+	{ 'echasnovski/mini.nvim',      version = '*' },
 	{
 		"windwp/nvim-ts-autotag",
 		config = function()
