@@ -18,11 +18,16 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
+	{
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		priority = 1000,
+	},
 	-- file manager
-	{ "stevearc/oil.nvim",          opts = { default_file_explorer = false } },
+	{ "stevearc/oil.nvim",     opts = { default_file_explorer = false } },
 
 	-- collection of utilities
-	{ 'echasnovski/mini.nvim',      version = '*' },
+	{ 'echasnovski/mini.nvim', version = '*' },
 	{
 		"windwp/nvim-ts-autotag",
 		config = function()
@@ -90,7 +95,7 @@ require("lazy").setup({
 		build = ':TSUpdate',
 	},
 
-	{              -- golang
+	{          -- golang
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
 			"ray-x/guihua.lua",
@@ -218,6 +223,8 @@ require('mason-lspconfig').setup({
 
 -- ------------
 -- Vim configs
+vim.cmd("colorscheme cyberdream")
+
 -- fix tabs
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
