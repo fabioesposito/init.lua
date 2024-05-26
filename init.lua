@@ -18,16 +18,14 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
 
-	{
-		"scottmckendry/cyberdream.nvim",
-		lazy = false,
-		priority = 1000,
-	},
+	-- colorscheme
+	{ "scottmckendry/cyberdream.nvim", },
+
 	-- file manager
-	{ "stevearc/oil.nvim",     opts = { default_file_explorer = false } },
+	{ "stevearc/oil.nvim",             opts = { default_file_explorer = false } },
 
 	-- collection of utilities
-	{ 'echasnovski/mini.nvim', version = '*' },
+	{ 'echasnovski/mini.nvim',         version = '*' },
 	{
 		"windwp/nvim-ts-autotag",
 		config = function()
@@ -95,7 +93,8 @@ require("lazy").setup({
 		build = ':TSUpdate',
 	},
 
-	{          -- golang
+	{ "gleam-lang/gleam.vim" },
+	{
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
 			"ray-x/guihua.lua",
@@ -191,7 +190,7 @@ lsp_zero.on_attach(function(client, bufnr)
 		preserve_mappings = false
 	})
 end)
-lsp_zero.setup_servers({ 'lua_ls', 'rust_analyzer', 'gopls', 'html', 'htmx', 'tsserver' })
+-- lsp_zero.setup_servers({ 'lua_ls', 'rust_analyzer', 'gopls', 'html', 'htmx', 'tsserver' })
 
 local cmp = require('cmp')
 cmp.setup({
@@ -218,12 +217,24 @@ cmp.setup({
 -- to learn how to use mason.nvim with lsp-zero
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	handlers = { lsp_zero.default_setup },
+	ensure_installed = {},
+	handlers = {
+		function()
+			require('lspconfig')['elixirls'].setup({})
+			require('lspconfig')['gleam'].setup({})
+			require('lspconfig')['gopls'].setup({})
+			require('lspconfig')['hls'].setup({})
+			require('lspconfig')['lua_ls'].setup({})
+			require('lspconfig')['tsserver'].setup({})
+		end,
+	},
 })
 
 -- ------------
 -- Vim configs
+vim.o.background = "dark"
 vim.cmd("colorscheme cyberdream")
+-- vim.cmd("colorscheme kanagawa")
 
 -- fix tabs
 vim.o.tabstop = 4
