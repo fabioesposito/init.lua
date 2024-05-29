@@ -217,15 +217,10 @@ cmp.setup({
 -- to learn how to use mason.nvim with lsp-zero
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = {},
+	ensure_installed = { 'tsserver', 'gopls', 'lua_ls' },
 	handlers = {
-		function()
-			require('lspconfig')['elixirls'].setup({})
-			require('lspconfig')['gleam'].setup({})
-			require('lspconfig')['gopls'].setup({})
-			require('lspconfig')['hls'].setup({})
-			require('lspconfig')['lua_ls'].setup({})
-			require('lspconfig')['tsserver'].setup({})
+		function(server_name)
+			require('lspconfig')[server_name].setup({})
 		end,
 	},
 })
