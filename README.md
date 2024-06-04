@@ -1,6 +1,6 @@
 # init.lua
 
-My neovim IDE setup under 300 lines of lua code
+My neovim IDE setup under 500 lines of lua code
 
 ## setup
 ```
