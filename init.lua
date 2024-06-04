@@ -64,6 +64,7 @@ require("lazy").setup({
 		end
 	},
 	-- telescope
+	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.6',
@@ -78,7 +79,7 @@ require("lazy").setup({
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
-	{ 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+	{ 'VonHeikemen/lsp-zero.nvim',                branch = 'v3.x' },
 	{ 'neovim/nvim-lspconfig' },
 	{ 'hrsh7th/cmp-nvim-lsp' },
 	{ 'hrsh7th/cmp-path' },
@@ -136,6 +137,25 @@ require('which-key').register({
 	['<leader>b'] = { '[B]uffers' },
 	['<leader>g'] = { 'Lazy[G]it' },
 }, { mode = 'n' })
+
+require('telescope').load_extension('fzf')
+require('telescope').setup {
+	defaults = {
+		color_devicons = false,
+		layout_config = {
+			width = 0.7,
+			horizontal = {
+				preview_width = 0.6
+			}
+		}
+	},
+	pickers = {
+		buffers = {
+			ignore_current_buffer = true,
+			sort_lastused = true,
+		},
+	},
+}
 
 require('gitsigns').setup {
 	on_attach = function(bufnr)
