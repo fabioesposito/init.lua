@@ -193,7 +193,7 @@ require('gitsigns').setup {
 
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { 'go', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+	ensure_installed = { 'gleam', 'go', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = true,
@@ -245,6 +245,7 @@ require('mason-lspconfig').setup({
 	},
 })
 
+require("lspconfig").gleam.setup({})
 -- ------------
 -- Vim configs
 vim.o.background = "dark"
