@@ -85,7 +85,8 @@ require("lazy").setup({
 	{ 'hrsh7th/cmp-path' },
 	{ 'hrsh7th/cmp-buffer' },
 	{ 'hrsh7th/nvim-cmp' },
-	{ 'L3MON4D3/LuaSnip' },
+	{ 'dcampos/nvim-snippy' },
+	{ 'dcampos/cmp-snippy' },
 	{
 		'nvim-treesitter/nvim-treesitter',
 		dependencies = {
@@ -214,11 +215,16 @@ end)
 
 local cmp = require('cmp')
 cmp.setup({
+	snippet = {
+		expand = function(args)
+			require 'snippy'.expand_snippet(args.body)
+		end
+	},
 	sources = {
 		{ name = 'path' },
 		{ name = 'nvim_lsp' },
 		{ name = 'nvim_lua' },
-		{ name = 'luasnip', keyword_length = 2 },
+		{ name = 'snippy',  keyword_length = 2 },
 		{ name = 'buffer',  keyword_length = 3 },
 	},
 	formatting = lsp_zero.cmp_format(),
