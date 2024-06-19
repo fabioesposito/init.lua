@@ -17,6 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ "nvim-lua/plenary.nvim" },
 	{ 'nvim-tree/nvim-web-devicons' },
+	{ 'MunifTanjim/nui.nvim' },
+	{ "folke/noice.nvim",              event = "VeryLazy", },
 
 	-- colorscheme
 	{ "scottmckendry/cyberdream.nvim", },
@@ -38,9 +40,10 @@ require("lazy").setup({
 	{ 'lewis6991/gitsigns.nvim' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
+	{ 'pwntester/octo.nvim',                 config = function() require "octo".setup() end },
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                  opts = {} },
 
 	-- colorize tags like TODO: FIXME: NOTE:
 	{ "folke/todo-comments.nvim",            opts = {} },
@@ -123,6 +126,25 @@ require("lazy").setup({
 
 -- ------------
 -- Plugin config
+require("noice").setup({
+	lsp = {
+		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+		},
+	},
+	-- you can enable a preset for easier configuration
+	presets = {
+		bottom_search = true,    -- use a classic bottom cmdline for search
+		command_palette = true,  -- position the cmdline and popupmenu together
+		long_message_to_split = false, -- long messages will be sent to a split
+		inc_rename = false,      -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = false,  -- add a border to hover docs and signature help
+	},
+})
+
 require('mini.basics').setup()
 require('mini.tabline').setup()
 require('mini.statusline').setup()
@@ -184,11 +206,9 @@ require('gitsigns').setup {
 		-- Actions
 		map('n', '<leader>hd', gs.diffthis, { desc = "Diff" })
 		map('n', '<leader>hp', gs.preview_hunk)
-		map('n', '<leader>hs', gs.stage_hunk, { desc = "Stage hunk" })
-		map('n', '<leader>hS', gs.stage_buffer, { desc = "Stage buffer" })
 		map('n', '<leader>hr', gs.reset_hunk, { desc = "Reset hunk" })
 		map('n', '<leader>hR', gs.reset_buffer, { desc = "Reset buffer" })
-		map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "Undo stage hunk" })
+		map('n', '<leader>hb', gs.blame_line, { desc = 'git [b]lame line' })
 	end
 }
 
