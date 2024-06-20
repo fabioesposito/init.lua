@@ -174,12 +174,40 @@ require('mini.comment').setup()
 require('mini.cursorword').setup()
 require('mini.fuzzy').setup()
 
+local function telescope_live_grep_open_files()
+	require('telescope.builtin').live_grep {
+		grep_open_files = true,
+		prompt_title = 'Live Grep in Open Files',
+	}
+end
+
 require('which-key').register({
-	['<leader>h'] = { 'Git [H]unk' },
-	['<leader>s'] = { '[S]earch' },
-	['<leader>b'] = { '[B]uffers' },
-	['<leader>g'] = { 'Lazy[G]it' },
-}, { mode = 'n' })
+	h = {
+		name = "Git", -- prefix for Git-related commands
+		d = { "<cmd>Gitsigns diffthis<CR>", "Diff" },
+		p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk" },
+		r = { "<cmd>Gitsigns reset_hunk<CR>", "Reset Hunk" },
+		R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer" },
+		b = { "<cmd>Gitsigns blame_line<CR>", "Blame Line" },
+	},
+	s = {
+		name = "Search", -- prefix for Search-related commands
+		f = { require('telescope.builtin').find_files, "Find Files" },
+		g = { require('telescope.builtin').git_files, "Git Files" },
+		['/'] = { telescope_live_grep_open_files, "Grep Open Files" },
+		r = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Grep with Args" },
+	},
+	b = {
+		name = "Buffer", -- prefix for Buffer-related commands
+		c = { ":bdelete<CR>", "Close Buffer" },
+		n = { ":bnext<CR>", "Next Buffer" },
+		p = { ":bprevious<CR>", "Previous Buffer" },
+	},
+	g = { "<cmd>LazyGit<CR>", "LazyGit" },
+	e = { ":Oil --float<CR>", "Explorer" },
+	['<space>'] = { require('telescope.builtin').buffers, "Buffer List" },
+	q = { ":qa<CR>", "Quit" },
+}, { prefix = "<leader>" })
 
 require('telescope').load_extension('fzf')
 require('telescope').setup {
@@ -222,13 +250,6 @@ require('gitsigns').setup {
 			vim.schedule(function() gs.prev_hunk() end)
 			return '<Ignore>'
 		end, { expr = true })
-
-		-- Actions
-		map('n', '<leader>hd', gs.diffthis, { desc = "Diff" })
-		map('n', '<leader>hp', gs.preview_hunk)
-		map('n', '<leader>hr', gs.reset_hunk, { desc = "Reset hunk" })
-		map('n', '<leader>hR', gs.reset_buffer, { desc = "Reset buffer" })
-		map('n', '<leader>hb', gs.blame_line, { desc = 'git [b]lame line' })
 	end
 }
 
@@ -251,7 +272,6 @@ lsp_zero.on_attach(function(client, bufnr)
 		preserve_mappings = false
 	})
 end)
--- lsp_zero.setup_servers({ 'lua_ls', 'rust_analyzer', 'gopls', 'html', 'htmx', 'tsserver' })
 
 local cmp = require('cmp')
 cmp.setup({
@@ -345,24 +365,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	group = highlight_group,
 	pattern = '*',
 })
-
-vim.keymap.set('n', '<leader>e', ':Oil --float<cr>', { desc = '[E]xplorer' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = 'Buffer list' })
-vim.keymap.set('n', '<leader>bc', ':bdelete<cr>', { desc = '[C]lose buffer' })
-vim.keymap.set('n', '<leader>bn', ':bnext<cr>', { desc = '[N]ext buffer' })
-vim.keymap.set('n', '<leader>bp', ':bprevious<cr>', { desc = '[P]revious buffer' })
-
-local function telescope_live_grep_open_files()
-	require('telescope.builtin').live_grep {
-		grep_open_files = true,
-		prompt_title = 'Live Grep in Open Files',
-	}
-end
-
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = 'Search [F]iles' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').git_files, { desc = 'Search [G]it Files' })
-vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[/] Grep in Open Files' })
-vim.keymap.set("n", '<leader>sr', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
-	{ desc = ' G[r]ep with args' })
-vim.keymap.set('n', '<leader>q', ':qa<cr>', { desc = '[Q]uit' })
-vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>', { desc = 'LazyGit' })
