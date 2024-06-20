@@ -207,7 +207,9 @@ require('which-key').register({
 	e = { ":Oil --float<CR>", "Explorer" },
 	['<space>'] = { require('telescope.builtin').buffers, "Buffer List" },
 	q = { ":qa<CR>", "Quit" },
+	w = { ":w<CR>", "Write (Save)" },
 }, { prefix = "<leader>" })
+
 
 require('telescope').load_extension('fzf')
 require('telescope').setup {
