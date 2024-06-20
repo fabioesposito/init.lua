@@ -24,10 +24,14 @@ require("lazy").setup({
 	{ "scottmckendry/cyberdream.nvim", },
 
 	-- file manager
-	{ "stevearc/oil.nvim",             opts = { default_file_explorer = false } },
+	{
+		"stevearc/oil.nvim",
+		opts = { default_file_explorer = false },
+		event = 'VeryLazy'
+	},
 
 	-- collection of utilities
-	{ 'echasnovski/mini.nvim',         version = '*' },
+	{ 'echasnovski/mini.nvim',  version = '*' },
 	{
 		"windwp/nvim-ts-autotag",
 		config = function()
@@ -36,17 +40,24 @@ require("lazy").setup({
 	},
 
 	-- git stuff
-	{ "kdheepak/lazygit.nvim", },
+	{ "kdheepak/lazygit.nvim",  event = 'VeryLazy' },
 	{ 'lewis6991/gitsigns.nvim' },
 	{ 'tpope/vim-fugitive' },
 	{ 'tpope/vim-rhubarb' },
-	{ 'pwntester/octo.nvim',                 config = function() require "octo".setup() end },
+	{
+		'pwntester/octo.nvim',
+		config = function() require "octo".setup() end,
+		event = 'VeryLazy'
+	},
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                  opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
 	-- colorize tags like TODO: FIXME: NOTE:
-	{ "folke/todo-comments.nvim",            opts = {} },
+	{
+		"folke/todo-comments.nvim",
+		opts = {}
+	},
 
 	{ -- command helper
 		"folke/which-key.nvim",
@@ -67,7 +78,11 @@ require("lazy").setup({
 		end
 	},
 	-- telescope
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+	{
+		'nvim-telescope/telescope-fzf-native.nvim',
+		build =
+		'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+	},
 	{
 		'nvim-telescope/telescope.nvim',
 		tag = '0.1.6',
@@ -82,7 +97,11 @@ require("lazy").setup({
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
-	{ 'VonHeikemen/lsp-zero.nvim',                branch = 'v3.x' },
+	{
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v3.x',
+		event = 'VeryLazy'
+	},
 	{ 'neovim/nvim-lspconfig' },
 	{ 'hrsh7th/cmp-nvim-lsp' },
 	{ 'hrsh7th/cmp-path' },
@@ -98,7 +117,7 @@ require("lazy").setup({
 		build = ':TSUpdate',
 	},
 
-	{ "gleam-lang/gleam.vim" },
+	{ "gleam-lang/gleam.vim", event = 'VeryLazy' },
 	{
 		"ray-x/go.nvim",
 		dependencies = { -- optional packages
@@ -120,7 +139,8 @@ require("lazy").setup({
 			model = "llama3",
 			host = "localhost",
 			port = "11434",
-		}
+		},
+		event = 'VeryLazy'
 	},
 })
 
