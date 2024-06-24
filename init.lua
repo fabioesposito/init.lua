@@ -136,7 +136,7 @@ require("lazy").setup({
 	{ -- llm
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "llama3",
+			model = "mistral:7b",
 			host = "localhost",
 			port = "11434",
 		},
@@ -316,9 +316,7 @@ require('mason-lspconfig').setup({
 require("lspconfig").gleam.setup({})
 -- ------------
 -- Vim configs
-vim.o.background = "dark"
-vim.cmd("colorscheme cyberdream")
--- vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme cyberdream")
 
 -- fix tabs
 vim.o.tabstop = 4
