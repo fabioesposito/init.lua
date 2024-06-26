@@ -94,6 +94,11 @@ require("lazy").setup({
 		end,
 	},
 
+	-- DAP plugins
+	{ 'mfussenegger/nvim-dap' },
+	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+	{'theHamsta/nvim-dap-virtual-text', opts = {}},
+
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
 	{ 'williamboman/mason-lspconfig.nvim' },
@@ -316,7 +321,7 @@ require('mason-lspconfig').setup({
 require("lspconfig").gleam.setup({})
 -- ------------
 -- Vim configs
--- vim.cmd("colorscheme cyberdream")
+vim.cmd("colorscheme cyberdream")
 
 -- fix tabs
 vim.o.tabstop = 4
