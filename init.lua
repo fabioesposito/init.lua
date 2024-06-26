@@ -38,6 +38,7 @@ require("lazy").setup({
 			require("nvim-ts-autotag").setup()
 		end,
 	},
+	{ 'chentoast/marks.nvim',   opts = {} },
 
 	-- git stuff
 	{ "kdheepak/lazygit.nvim",  event = 'VeryLazy' },
@@ -51,7 +52,7 @@ require("lazy").setup({
 	},
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                                       opts = {} },
 
 	-- colorize tags like TODO: FIXME: NOTE:
 	{
@@ -96,8 +97,8 @@ require("lazy").setup({
 
 	-- DAP plugins
 	{ 'mfussenegger/nvim-dap' },
-	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
-	{'theHamsta/nvim-dap-virtual-text', opts = {}},
+	{ "rcarriga/nvim-dap-ui",                dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
+	{ 'theHamsta/nvim-dap-virtual-text',     opts = {} },
 
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
