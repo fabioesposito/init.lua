@@ -52,7 +52,7 @@ require("lazy").setup({
 	},
 
 	-- vertical guide
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",                                                       opts = {} },
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
 	-- colorize tags like TODO: FIXME: NOTE:
 	{
@@ -96,9 +96,50 @@ require("lazy").setup({
 	},
 
 	-- DAP plugins
-	{ 'mfussenegger/nvim-dap' },
-	{ "rcarriga/nvim-dap-ui",                dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
-	{ 'theHamsta/nvim-dap-virtual-text',     opts = {} },
+	{
+		'mfussenegger/nvim-dap',
+		dependencies = {
+			"leoluz/nvim-dap-go",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+		},
+		config = function()
+			local dap = require "dap"
+			local ui = require "dapui"
+
+			require("dapui").setup()
+			require("dap-go").setup()
+
+			vim.keymap.set("n", "<F5>", dap.toggle_breakpoint)
+			-- vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
+
+			-- Eval var under cursor
+			vim.keymap.set("n", "<space>?", function()
+				require("dapui").eval(nil, { enter = true })
+			end)
+
+			vim.keymap.set("n", "<F6>", dap.continue)
+			vim.keymap.set("n", "<F7>", dap.step_into)
+			vim.keymap.set("n", "<F8>", dap.step_over)
+			vim.keymap.set("n", "<F9>", dap.step_out)
+			vim.keymap.set("n", "<F10>", dap.step_back)
+			vim.keymap.set("n", "<F12>", dap.restart)
+
+			dap.listeners.before.attach.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				ui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				ui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				ui.close()
+			end
+		end
+	},
 
 	-- LSP plugins
 	{ 'williamboman/mason.nvim' },
@@ -144,7 +185,7 @@ require("lazy").setup({
 		version = '^3', -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
-	{         -- llm
+	{             -- llm
 		"David-Kunz/gen.nvim",
 		opts = {
 			model = "mistral:7b",
@@ -168,11 +209,11 @@ require("noice").setup({
 	},
 	-- you can enable a preset for easier configuration
 	presets = {
-		bottom_search = true, -- use a classic bottom cmdline for search
-		command_palette = true, -- position the cmdline and popupmenu together
+		bottom_search = true,    -- use a classic bottom cmdline for search
+		command_palette = true,  -- position the cmdline and popupmenu together
 		long_message_to_split = false, -- long messages will be sent to a split
-		inc_rename = false, -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = false, -- add a border to hover docs and signature help
+		inc_rename = false,      -- enables an input dialog for inc-rename.nvim
+		lsp_doc_border = false,  -- add a border to hover docs and signature help
 	},
 })
 
