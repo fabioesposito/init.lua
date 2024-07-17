@@ -38,7 +38,6 @@ require("lazy").setup({
 			require("nvim-ts-autotag").setup()
 		end,
 	},
-	{ 'chentoast/marks.nvim',   opts = {} },
 
 	-- git stuff
 	{ "kdheepak/lazygit.nvim",  event = 'VeryLazy' },
@@ -119,8 +118,8 @@ require("lazy").setup({
 			vim.keymap.set("n", "<F5>", dap.toggle_breakpoint)
 			vim.keymap.set("n", "<F6>", dap.continue)
 			vim.keymap.set("n", "<F7>", dap.restart)
-			vim.keymap.set("n", "<F8>", dap.step_into)
-			vim.keymap.set("n", "<F9>", dap.step_over)
+			vim.keymap.set("n", "<F8>", dap.step_over)
+			vim.keymap.set("n", "<F9>", dap.step_into)
 			vim.keymap.set("n", "<F10>", dap.step_out)
 
 			dap.listeners.before.attach.dapui_config = function()
@@ -185,7 +184,7 @@ require("lazy").setup({
 	{             -- llm
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "mistral:7b",
+			model = "codegemma:7b",
 			host = "localhost",
 			port = "11434",
 		},
