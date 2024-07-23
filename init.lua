@@ -110,18 +110,6 @@ require("lazy").setup({
 			require("dapui").setup()
 			require("dap-go").setup()
 
-			-- Eval var under cursor
-			vim.keymap.set("n", "<space>?", function()
-				require("dapui").eval(nil, { enter = true })
-			end)
-
-			vim.keymap.set("n", "<F5>", dap.toggle_breakpoint)
-			vim.keymap.set("n", "<F6>", dap.continue)
-			vim.keymap.set("n", "<F7>", dap.restart)
-			vim.keymap.set("n", "<F8>", dap.step_over)
-			vim.keymap.set("n", "<F9>", dap.step_into)
-			vim.keymap.set("n", "<F10>", dap.step_out)
-
 			dap.listeners.before.attach.dapui_config = function()
 				ui.open()
 			end
@@ -229,34 +217,48 @@ local function telescope_live_grep_open_files()
 	}
 end
 
-require('which-key').register({
-	h = {
-		name = "Git", -- prefix for Git-related commands
-		d = { "<cmd>Gitsigns diffthis<CR>", "Diff" },
-		p = { "<cmd>Gitsigns preview_hunk<CR>", "Preview Hunk" },
-		r = { "<cmd>Gitsigns reset_hunk<CR>", "Reset Hunk" },
-		R = { "<cmd>Gitsigns reset_buffer<CR>", "Reset Buffer" },
-		b = { "<cmd>Gitsigns blame_line<CR>", "Blame Line" },
-	},
-	s = {
-		name = "Search", -- prefix for Search-related commands
-		f = { require('telescope.builtin').find_files, "Find Files" },
-		g = { require('telescope.builtin').git_files, "Git Files" },
-		['/'] = { telescope_live_grep_open_files, "Grep Open Files" },
-		r = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Grep with Args" },
-	},
-	b = {
-		name = "Buffer", -- prefix for Buffer-related commands
-		c = { ":bdelete<CR>", "Close Buffer" },
-		n = { ":bnext<CR>", "Next Buffer" },
-		p = { ":bprevious<CR>", "Previous Buffer" },
-	},
-	g = { "<cmd>LazyGit<CR>", "LazyGit" },
-	e = { ":Oil --float<CR>", "Explorer" },
-	['<space>'] = { require('telescope.builtin').buffers, "Buffer List" },
-	q = { ":qa<CR>", "Quit" },
-	w = { ":w<CR>", "Write (Save)" },
-}, { prefix = "<leader>" })
+local dap = require "dap"
+local ui = require "dapui"
+
+local wk = require("which-key")
+wk.add({
+	-- Git-related commands
+	{ "<leader>h",       group = "Git" },
+	{ "<leader>hd",      "<cmd>Gitsigns diffthis<CR>",                                                   desc = "Diff" },
+	{ "<leader>hp",      "<cmd>Gitsigns preview_hunk<CR>",                                               desc = "Preview Hunk" },
+	{ "<leader>hr",      "<cmd>Gitsigns reset_hunk<CR>",                                                 desc = "Reset Hunk" },
+	{ "<leader>hR",      "<cmd>Gitsigns reset_buffer<CR>",                                               desc = "Reset Buffer" },
+	{ "<leader>hb",      "<cmd>Gitsigns blame_line<CR>",                                                 desc = "Blame Line" },
+
+	-- Search-related commands
+	{ "<leader>s",       group = "Search" },
+	{ "<leader>sf",      "<cmd>Telescope find_files<cr>",                                                desc = "Find Files" },
+	{ "<leader>sg",      "<cmd>Telescope git_files<cr>",                                                 desc = "Git Files" },
+	{ "<leader>s/",      "<cmd>Telescope live_grep<cr>",                                                 desc = "Grep Open Files" },
+	{ "<leader>sr",      function() require('telescope').extensions.live_grep_args.live_grep_args() end, desc = "Grep with Args" },
+
+	-- Buffer-related commands
+	{ "<leader>b",       group = "Buffer" },
+	{ "<leader>bc",      "<cmd>bdelete<CR>",                                                             desc = "Close Buffer" },
+	{ "<leader>bn",      "<cmd>bnext<CR>",                                                               desc = "Next Buffer" },
+	{ "<leader>bp",      "<cmd>bprevious<CR>",                                                           desc = "Previous Buffer" },
+
+	{ "<leader>d",       group = "Debugger" },
+	{ "<leader>?",       function() require("dapui").eval(nil, { enter = true }) end,                    hidden = true,             desc = "Eval under cursor" },
+	{ "<F5>",            "<cmd>bprevious<CR>",                                                           desc = "Toggle breakpoint" },
+	{ "<F6>",            "<cmd>bprevious<CR>",                                                           desc = "Continue" },
+	{ "<F7>",            "<cmd>bprevious<CR>",                                                           desc = "Restart" },
+	{ "<F8>",            "<cmd>bprevious<CR>",                                                           desc = "Step over" },
+	{ "<F9>",            "<cmd>bprevious<CR>",                                                           desc = "Step into" },
+	{ "<F10>",           "<cmd>bprevious<CR>",                                                           desc = "Step out" },
+
+	-- Miscellaneous commands
+	{ "<leader>g",       "<cmd>LazyGit<CR>",                                                             desc = "LazyGit" },
+	{ "<leader>e",       "<cmd>Oil --float<CR>",                                                         desc = "Explorer" },
+	{ "<leader><space>", "<cmd>Telescope buffers<cr>",                                                   desc = "Buffer List" },
+	{ "<leader>q",       "<cmd>qa<CR>",                                                                  desc = "Quit" },
+	{ "<leader>w",       "<cmd>w<CR>",                                                                   desc = "Write (Save)" },
+})
 
 
 require('telescope').load_extension('fzf')
