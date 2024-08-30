@@ -126,7 +126,12 @@ require("lazy").setup({
 	},
 
 	-- LSP plugins
-	{ 'williamboman/mason.nvim' },
+	{
+		'williamboman/mason.nvim',
+		opts = {
+			PATH = "append",
+		}
+	},
 	{ 'williamboman/mason-lspconfig.nvim' },
 	{
 		'VonHeikemen/lsp-zero.nvim',
