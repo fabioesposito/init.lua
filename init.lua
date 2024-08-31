@@ -174,7 +174,11 @@ require("lazy").setup({
 		version = '^3', -- Recommended
 		lazy = false, -- This plugin is already lazy
 	},
-	{             -- llm
+	{
+		"elixir-tools/elixir-tools.nvim",
+		version = "*",
+	},
+	{ -- llm
 		"David-Kunz/gen.nvim",
 		opts = {
 			model = "codegemma:7b",
@@ -184,6 +188,8 @@ require("lazy").setup({
 		event = 'VeryLazy'
 	},
 })
+
+require("elixir").setup()
 
 -- ------------
 -- Plugin config
@@ -316,6 +322,8 @@ require('nvim-treesitter.configs').setup {
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = true,
+	highlight = { enable = true },
+	indent = { enable = true },
 }
 
 local lsp_zero = require('lsp-zero')
