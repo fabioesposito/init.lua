@@ -312,7 +312,7 @@ require('gitsigns').setup {
 
 require('nvim-treesitter.configs').setup {
 	-- Add languages to be installed here that you want installed for treesitter
-	ensure_installed = { 'gleam', 'go', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+	ensure_installed = { 'gleam', 'go', 'java', 'kotlin', 'lua', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
 	-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
 	auto_install = true,
@@ -362,7 +362,7 @@ cmp.setup({
 -- to learn how to use mason.nvim with lsp-zero
 require('mason').setup({})
 require('mason-lspconfig').setup({
-	ensure_installed = { 'tsserver', 'gopls', 'lua_ls' },
+	ensure_installed = { 'gopls', 'lua_ls' },
 	handlers = {
 		function(server_name)
 			require('lspconfig')[server_name].setup({})
